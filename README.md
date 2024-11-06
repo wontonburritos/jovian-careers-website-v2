@@ -1,2 +1,2 @@
 # jovian-careers-website
-learning web apps
+learning more web apps
