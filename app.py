@@ -6,10 +6,11 @@ app = Flask(__name__)
 
 def load_jobs_from_db():
     with engine.connect() as conn:
-        result = conn.execute(text("select * from jobs"))
+        result = conn.execute(text("select title, location, salary from jobs"))
         jobs = []
         for row in result.all():
-            jobs.append(dict(row))
+            jobs.append(row)
+        print(jobs)
         return jobs
 
 @app.route('/')
