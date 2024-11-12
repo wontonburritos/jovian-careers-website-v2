@@ -1,17 +1,7 @@
-from flask import Flask, render_template, jsonify
-from database import engine
-from sqlalchemy import text
+from flask import Flask, render_template#, jsonify
+from database import load_jobs_from_db
 
 app = Flask(__name__)
-
-def load_jobs_from_db():
-    with engine.connect() as conn:
-        result = conn.execute(text("select title, location, salary from jobs"))
-        jobs = []
-        for row in result.all():
-            jobs.append(row)
-        print(jobs)
-        return jobs
 
 @app.route('/')
 def hello_jovian():
@@ -20,7 +10,8 @@ def hello_jovian():
 
 #@app.route('/api/jobs')
 #def list_jobs():
-#    return jsonify(JOBS)
+#    jobs = load_jobs_from_db()
+#    return jobs
 
 if __name__ == '__main__':
     app.run(host= '0.0.0.0', debug=True, port=5001)
